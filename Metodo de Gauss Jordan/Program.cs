@@ -23,6 +23,8 @@ namespace Metodo_de_Gauss_Jordan
             double suma1 = 0;
             double suma2 = 0;
             double suma3 = 0;
+            int cont = 0;
+            double cambio = 0;
             double[] b = new double[3];
             double[,] A = new double[3, 3];//Matriz del sistema
             int[,] B = new int[3, 1];//Matriz de terminos independientes
@@ -169,9 +171,66 @@ namespace Metodo_de_Gauss_Jordan
             for (int f = 0; f < 3; f++)
             {
                 Console.WriteLine();
-                if (AB[0, 0] != 0)
+                if (f == 0)
                 {
-                    a1 = AB[0, 0];
+                    if (AB[0, 0] != 0)
+                    {
+                        a1 = AB[0, 0];
+                    }
+                    else//prueba
+                    {
+
+                        if (AB[1, 0] != 0)
+                        {
+                            if (AB[1, 0] <= AB[2, 0])
+                            {
+                                do
+                                {
+                                    cambio = AB[0, cont];
+                                    AB[0, cont] = AB[1, cont];
+                                    AB[1, cont] = cambio;
+                                    cont++;
+                                } while (cont <= 3);
+                                a1 = AB[0, 0];
+                            }
+                            else
+                            {
+                                do
+                                {
+                                    cambio = AB[0, cont];
+                                    AB[0, cont] = AB[2, cont];
+                                    AB[2, cont] = cambio;
+                                    cont++;
+                                } while (cont <= 3);
+                                a1 = AB[0, 0];
+                            }
+                        }
+                        else
+                        {
+                            
+                          if (AB[1, 0] < AB[2, 0])
+                                {
+                                do{ 
+                                    cambio = AB[0, cont];
+                                    AB[0, cont] = AB[2, cont];
+                                    AB[2, cont] = cambio;
+                                    cont++;
+                                   } while (cont <= 3) ;
+                                a1 = AB[0, 0];
+                                 }
+                            else
+                            {
+                                do { 
+                                cambio = AB[0, cont];
+                                AB[0, cont] = AB[2, cont];
+                                AB[2, cont] = cambio;
+                                cont++;
+                                } while (cont <= 3);
+                                a1 = AB[0, 0];
+                            }
+                        }
+
+                    }
                 }
                 if (AB[1, 1] != 0)
                 {
@@ -184,7 +243,7 @@ namespace Metodo_de_Gauss_Jordan
 
                 for (int c = 0; c < 4; c++)
                 {
-                    if (f == 0)
+                    if (f == 0)//Busco el 1° pivote y sus ceros
                     {
                         AB[0, c] = (AB[0, c] / a1);
 
@@ -202,7 +261,7 @@ namespace Metodo_de_Gauss_Jordan
                             AB[2, c] = AB[2, c] - ((AB[0, c]) * aux2);
                         }
                     }
-                    if (f == 1)
+                    if (f == 1)//Busco el 2° pivote y sus ceros
                     {
                         AB[1, c] = (AB[1, c] / b1);
                         if (AB[1, 1] == 1)
@@ -220,7 +279,7 @@ namespace Metodo_de_Gauss_Jordan
                         }
 
                     }
-                    if (f == 2)
+                    if (f == 2)//Busco el 3° pivote y sus ceros
                     {
                         AB[2, c] = (AB[2, c] / c1);
 
@@ -330,6 +389,12 @@ namespace Metodo_de_Gauss_Jordan
             {
                 Console.WriteLine();
                 Console.WriteLine($"  Solucion del Sistema x = {AB[0, 3]},  y = {AB[1, 3]},  z = {AB[2, 3]} ");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine($" No se cumplen las igualdades por lo tanto el Sistemas Incompatible sin solucion ");
                 Console.WriteLine();
             }
             Console.WriteLine();
