@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Metodo_de_Gauss_Jordan
 {
+
+    //CHOCOBAR MATIAS SEBASTIAN
+    //LEGAJO 59234
+
     class Program
     {
         static void Main(string[] args)
